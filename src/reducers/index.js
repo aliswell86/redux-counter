@@ -21,26 +21,48 @@ function counter(state = initalStates, action) {
         }
       ]
     };
+
     case types.REMOVE:
     return {
       counters: counters.slice(0, counters.length - 1)
     };
 
-    // case types.INCREMENT:
-    // return {
-    //   ...state,
-    //   number: state.number + 1
-    // };
-    // case types.DECREMENT:
-    // return {
-    //   ...state,
-    //   number: state.number - 1
-    // };
-    // case types.SET_COLOR:
-    // return {
-    //   ...state,
-    //   color: action.color
-    // };
+    case types.INCREMENT:
+    return {
+      counters: [
+        ...counters.slice(0, action.index), //선택한 오브젝트 앞부분
+        {
+          ...counters[action.index], //선택한 오브젝트
+          number: counters[action.index].number + 1 //오브젝트내 필요값 변경
+        },
+        ...counters.slice(action.index + 1, counters.length) //선택한 오브젝트 뒷부분
+      ]
+    };
+
+    case types.DECREMENT:
+    return {
+      counters: [
+        ...counters.slice(0, action.index),
+        {
+          ...counters[action.index],
+          number: counters[action.index].number - 1
+        },
+        ...counters.slice(action.index + 1, counters.length)
+      ]
+    }
+
+    case types.SET_COLOR:
+    return {
+      counters: [
+        ...counters.slice(0, action.index),
+        {
+          ...counters[action.index],
+          color: action.color
+        },
+        ...counters.slice(action.index + 1, counters.length)
+      ]
+    }
+
     default:
       return state;
   }

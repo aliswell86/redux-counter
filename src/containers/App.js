@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import CounterContainer from '../containers/CounterContainer';
-import Button from '../components/Buttons';
+import CounterListContainer from './CounterListContainer';
+import ButtonContainer from './ButtonContainer';
 
 class App extends Component {
-
   render() {
     return (
       <div>
-        <Button />
-        <CounterContainer/>
+        <ButtonContainer/>
+        <CounterListContainer/>
       </div>
     );
   }
-
-}
+};
 
 export default App;

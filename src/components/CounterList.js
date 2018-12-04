@@ -1,9 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Counter from './Counter';
+import styles from './CounterList.scss'; //_i
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 
-const CounterList = ({counters}) => {
+const CounterList = ({counters, onIncrement, onDecrement, onSetColor}) => {
+  const counterList = counters.map(
+    (counter, i) => (
+      <Counter
+        key={i}
+        index={i}
+        {...counter}
+        onIncrement={onIncrement}
+        onDecrement={onDecrement}
+        onSetColor={onSetColor}/>
+    )
+  )
+
   return (
-    <div />
+    <div className={cx('CounterList')}>
+      {counterList}
+    </div>
   )
 };
 

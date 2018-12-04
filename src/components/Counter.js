@@ -4,21 +4,22 @@ import styles from './Counter.scss'; //_i
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
 
-const Counter = ({number, color, onSetColor, onIncrement, onDecrement}) => (
+const Counter = ({index, number, color, onSetColor, onIncrement, onDecrement}) => (
   <div
     className={cx('Counter')}
     style={{backgroundColor:color}}
-    onClick={onIncrement}
-    onDoubleClick={onSetColor}
+    onClick={() => onIncrement(index)}
+    onDoubleClick={() => onSetColor(index)}
     onContextMenu={(e) => {
       e.preventDefault();
-      onDecrement();
+      onDecrement(index);
     }}>
     {number}
   </div>
 );
 
 Counter.propTypes = {
+  index: PropTypes.number,
   number: PropTypes.number,
   color: PropTypes.string,
   onSetColor: PropTypes.func,
@@ -27,6 +28,7 @@ Counter.propTypes = {
 };
 
 Counter.defaultProps = {
+  index: 0,
   number: 0,
   color: 'black',
   onSetColor: () => console.warn('onSetColor not defined'),
